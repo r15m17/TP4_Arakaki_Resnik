@@ -1,4 +1,4 @@
-![Logo ITBA](Imágenes/logo.jpg)
+<img src="Imágenes/logo.jpg" alt="Logo ITBA" width="200"/>
 
 # TP4_Arakaki_Resnik
 
