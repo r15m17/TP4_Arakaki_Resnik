@@ -1,14 +1,106 @@
 # Parte 1: Bases de Datos
 
+# Parte 1: Bases de Datos
+
 ## 1. Tipo de Base de Datos
 
+La **base de datos de un centro médico** presentada en la consigna se puede clasificar según su estructura y función como relacional y transaccional, respectivamente. Es una base de datos **relacional**, porque maneja relaciones entre las distintas entidades involucradas  (pacientes,  médicos, recetas, consultas), y utiliza tablas con filas y columnas. Además, está diseñada para un sistema que requiere integridad referencial, consultas SQL y normalización.
+
+Según la función, se clasifica como **transaccional**, porque la base almacena datos de operaciones que se realizan en tiempo real (consultas, recetas, pacientes, etc.). Las funciones clave incluyen inserciones, actualizaciones y búsquedas, es decir: registro y gestión de transacciones clínicas. No se trata de una base *Data Warehouse* porque su uso previsto no es realizar análisis de datos, tampoco es *In-Memory* porque no está especificado para trabajar en memoria para alto rendimiento (consultas rápidas), ni una base de datos *data lakes*, porque no almacena grandes volúmenes de datos.
 
 ## 2. Diagrama Entidad-Relación
 
+Un **Diagrama Entidad-Relación (DER)** es una representación gráfica del modelo de datos de una base de datos. Su objetivo es mostrar:
+
+* **Entidades:** Son objetos del mundo real con existencia propia (por ejemplo, "Paciente", "Médico").
+* **Atributos:** Son las propiedades o características de las entidades (por ejemplo, "nombre", "fecha de nacimiento").
+* **Relaciones:** Son asociaciones entre entidades (ejemplo, un "Médico" que emite una "Receta").
+* **Cardinalidades:** Indican cuántas veces una entidad puede participar en una relación.
+* **Primary Key (PK):** Atributo que identifica unívocamente a cada instancia de una entidad.
+* **Foreign Key (FK):** Atributo que conecta una entidad con otra (relación referencial).
+
+![diagrama entidad-relacion](diagrama.png)
+
+En la imagen anterior se observa el Diagrama Entidad-Relación que representa el funcionamiento digital de un **centro médico**. Las distintas partes involucradas son:
+
+* **Entidades:** `Paciente` (atributos: `Nombre`, `Fecha de nacimiento`), `Médico` (`Nombre`, `Especialidad`), `Receta` (no tiene atributos propios en este modelo), y `Consulta` (`Fecha`, `Tratamiento`, `Enfermedad`).
+* **Relaciones:** `emite` (entre Paciente, Médico y Receta) y `incluye` (entre Receta y Consulta). Una receta puede incluir muchas consultas y una consulta puede estar relacionada con muchas recetas (relación N\:N).
+
+Este diagrama refleja con claridad la estructura necesaria para registrar las actividades en un centro médico. No están detalladas las claves primarias o foráneas ni se incluyen direcciones.
 
 ## 3. Modelo lógico entidad-relación
 
+El modelo lógico es una traducción del diagrama entidad relación a un modelo que se pueda implementar directo en un sistema de gestión de base de datos, como SQL. Se diferencia del anterior porque:
+
+* Usa tablas para representar entidades y relaciones.
+* Define tipos de datos para cada atributo.
+* Establece de forma explícita las claves.
+* Está más cerca de la implementación final.
+
+En el caso del centro médico, se definieron las tablas **`Paciente`, `Médico`, `Consulta` y `Receta`**, representando las entidades principales del sistema. Para cada una se detallan sus atributos, especificando el tipo de dato y las restricciones asociadas, como claves primarias, claves foráneas y condiciones de obligatoriedad.
+
+### Tabla: Paciente
+
+| Atributo          | Tipo de Dato | Restricciones       |
+| ----------------- | ------------ | ------------------- |
+| id\_paciente      | INT          | PK, AUTO\_INCREMENT |
+| nombre            | VARCHAR(100) | NOT NULL            |
+| fecha\_nacimiento | DATE         | NOT NULL            |
+| sexo              | CHAR(1)      | NOT NULL            |
+| calle             | VARCHAR(100) | NOT NULL            |
+| numero            | INT          | NOT NULL            |
+| ciudad            | VARCHAR(100) | NOT NULL            |
+
+### Tabla: Médico
+
+| Atributo        | Tipo de Dato | Restricciones       |
+| --------------- | ------------ | ------------------- |
+| id\_medico      | INT          | PK, AUTO\_INCREMENT |
+| nombre          | VARCHAR(100) | NOT NULL            |
+| especialidad    | VARCHAR(100) | NOT NULL            |
+| direccion\_prof | VARCHAR(150) | NOT NULL            |
+
+### Tabla: Consulta
+
+| Atributo     | Tipo de Dato | Restricciones       |
+| ------------ | ------------ | ------------------- |
+| id\_consulta | INT          | PK, AUTO\_INCREMENT |
+| id\_paciente | INT          | FK → Paciente(id)   |
+| id\_medico   | INT          | FK → Médico(id)     |
+| fecha        | DATE         | NOT NULL            |
+| tratamiento  | TEXT         |                     |
+| enfermedad   | VARCHAR(100) | NOT NULL            |
+
+### Tabla: Receta
+
+| Atributo     | Tipo de Dato | Restricciones       |
+| ------------ | ------------ | ------------------- |
+| id\_receta   | INT          | PK, AUTO\_INCREMENT |
+| id\_paciente | INT          | FK → Paciente(id)   |
+| id\_medico   | INT          | FK → Médico(id)     |
+| fecha        | DATE         | NOT NULL            |
+| medicamento  | VARCHAR(100) | NOT NULL            |
+| indicacion   | TEXT         |                     |
+| enfermedad   | VARCHAR(100) | NOT NULL            |
+
 ## 4. Normalización
+
+La **normalización** es un proceso para estructurar la base de datos eliminando redundancias, mejorando la integridad y facilitando el mantenimiento. Las formas más comunes son:
+
+* **1FN (Primera Forma Normal):** Eliminar atributos repetidos. Cada campo debe tener un único valor atómico.
+* **2FN (Segunda Forma Normal):** Eliminar dependencias parciales (aplica a claves compuestas).
+* **3FN (Tercera Forma Normal):** Eliminar dependencias transitivas. Cada campo no clave debe depender solo de la clave primaria.
+
+### Evaluación
+
+* ✅ Cumple 1FN: Cada tabla tiene valores atómicos (una sola ciudad, nombre, etc.).
+* ✅ Cumple 2FN: Las claves primarias son simples (ID autoincremental). No hay dependencias parciales.
+* ⚠️ Cumple parcialmente 3FN: Hay algunas dependencias transitivas y redundancias. Por ejemplo, en la columna `ciudad` de la tabla `Pacientes` hay múltiples variantes para la misma ciudad ("Buenos Aires", "buenos aires", etc.).
+
+### Conclusión
+
+La base de datos cumple con la Primera y Segunda Forma Normal. Además, tiene un buen grado de normalización en Tercera Forma Normal, gracias a la inclusión de tablas separadas para especialidades médicas, sexo biológico y medicamentos. No obstante, se recomienda mejorar la gestión de ciudades en la tabla de pacientes mediante la creación de una tabla de ciudades referenciada por clave foránea para evitar redundancias y errores de escritura.
+
 
 ---
 
