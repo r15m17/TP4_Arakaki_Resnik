@@ -376,7 +376,9 @@ GROUP BY Medicos.nombre, Pacientes.nombre
 ORDER BY Medicos.nombre, Pacientes.nombre;
 ``` 
 ![16](Imágenes/16a.png)
+
 ![16](Imágenes/16b.png)
+
 ![16](Imágenes/16c.png)
 
 ## Consulta 17
