@@ -20,6 +20,8 @@ BBDD, SQL y Manejo de Versiones
 El presente repositorio constituye el Trabajo Práctico #4 de Informática Médica 16.22 - 20252C realizado por las alumnas Arakaki y Resnik.
 En el mismo se analiza una base de datos para un centro de salud, queries de SQL, y la gestión de versiones utilizando Git y GitHub. El trabajo está dividido en tres partes principales:
 
+---
+
 ### Parte 1: Bases de Datos
 - Análisis del tipo y función de la base de datos
 - Diseño del modelo entidad-relación
