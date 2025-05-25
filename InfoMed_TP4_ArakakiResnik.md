@@ -1,7 +1,5 @@
 # Parte 1: Bases de Datos
 
-# Parte 1: Bases de Datos
-
 ## 1. Tipo de Base de Datos
 
 La **base de datos de un centro médico** presentada en la consigna se puede clasificar según su estructura y función como relacional y transaccional, respectivamente. Es una base de datos **relacional**, porque maneja relaciones entre las distintas entidades involucradas  (pacientes,  médicos, recetas, consultas), y utiliza tablas con filas y columnas. Además, está diseñada para un sistema que requiere integridad referencial, consultas SQL y normalización.
@@ -19,7 +17,7 @@ Un **Diagrama Entidad-Relación (DER)** es una representación gráfica del mode
 * **Primary Key (PK):** Atributo que identifica unívocamente a cada instancia de una entidad.
 * **Foreign Key (FK):** Atributo que conecta una entidad con otra (relación referencial).
 
-![diagrama entidad-relacion](diagrama.png)
+![diagrama entidad-relacion](diagrama (2).png)
 
 En la imagen anterior se observa el Diagrama Entidad-Relación que representa el funcionamiento digital de un **centro médico**. Las distintas partes involucradas son:
 
