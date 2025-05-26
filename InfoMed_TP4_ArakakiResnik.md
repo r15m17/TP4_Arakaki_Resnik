@@ -17,7 +17,7 @@ Un **Diagrama Entidad-Relación (DER)** es una representación gráfica del mode
 * **Primary Key (PK):** Atributo que identifica unívocamente a cada instancia de una entidad.
 * **Foreign Key (FK):** Atributo que conecta una entidad con otra (relación referencial).
 
-![diagrama entidad-relacion](diagrama (2).png)
+![diagrama entidad-relacion](Imágenes/diagrama (2).png)
 
 En la imagen anterior se observa el Diagrama Entidad-Relación que representa el funcionamiento digital de un **centro médico**. Las distintas partes involucradas son:
 
@@ -91,9 +91,9 @@ La **normalización** es un proceso para estructurar la base de datos eliminando
 
 ### Evaluación
 
-* ✅ Cumple 1FN: Cada tabla tiene valores atómicos (una sola ciudad, nombre, etc.).
-* ✅ Cumple 2FN: Las claves primarias son simples (ID autoincremental). No hay dependencias parciales.
-* ⚠️ Cumple parcialmente 3FN: Hay algunas dependencias transitivas y redundancias. Por ejemplo, en la columna `ciudad` de la tabla `Pacientes` hay múltiples variantes para la misma ciudad ("Buenos Aires", "buenos aires", etc.).
+* Cumple 1FN: Cada tabla tiene valores atómicos (una sola ciudad, nombre, etc.).
+* Cumple 2FN: Las claves primarias son simples (ID autoincremental). No hay dependencias parciales.
+* Cumple parcialmente 3FN: Hay algunas dependencias transitivas y redundancias. Por ejemplo, en la columna `ciudad` de la tabla `Pacientes` hay múltiples variantes para la misma ciudad ("Buenos Aires", "buenos aires", etc.).
 
 ### Conclusión
 
