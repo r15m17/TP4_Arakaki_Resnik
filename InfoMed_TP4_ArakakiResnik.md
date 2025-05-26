@@ -17,7 +17,7 @@ Un **Diagrama Entidad-Relación (DER)** es una representación gráfica del mode
 * **Primary Key (PK):** Atributo que identifica unívocamente a cada instancia de una entidad.
 * **Foreign Key (FK):** Atributo que conecta una entidad con otra (relación referencial).
 
-![diagrama entidad-relacion](Imágenes/diagrama (2).png)
+![Diagrama Entidad-Relación](Imágenes/diagrama_entidad_relacion.png)
 
 En la imagen anterior se observa el Diagrama Entidad-Relación que representa el funcionamiento digital de un **centro médico**. Las distintas partes involucradas son:
 
